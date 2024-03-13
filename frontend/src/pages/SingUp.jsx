@@ -1,7 +1,53 @@
-import { Button, Label, TextInput } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SingUp = () => {
+
+  const [formData,setFormData] = useState({})
+  const [errorMessage,setErrorMessage] = useState(null)
+  const [loading,setLoading] = useState(false)
+  const navigate = useNavigate();
+
+
+
+  const handleChange = (e)=>{
+    setFormData({...formData,[e.target.id]:e.target.value.trim()})
+
+  }
+  // console.log(formData)
+   
+  const handleSubmit= async(e)=>{
+    e.preventDefault()
+    if(!formData.username || !formData.email || !formData.password){
+      return setErrorMessage("Please fill all required fields")
+    }
+
+
+
+    try {
+      setLoading(true)
+      setErrorMessage(null)
+      const res = await fetch ('/api/auth/singup',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(formData)
+      });
+      const data = await res.json();
+      if(data.success === false){
+        return setErrorMessage(data.message)
+      }
+      setLoading(false)
+      if(res.ok){
+        navigate('/sing-in')
+      }
+    } catch (error) {
+      setErrorMessage(error.message)
+      setLoading(false)
+    }
+  }
+
+
   return (
     <div className="min-h-screen mt-40">
       <div className="flex flex-col items-center max-w-5xl gap-20 mx-auto md:flex-row">
@@ -21,33 +67,44 @@ const SingUp = () => {
 
         {/* right side  */}
         <div className="flex-1">
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
               <Label value="Your username" />
-              <TextInput type="text" id="username" placeholder="Username" />
+              <TextInput onChange={handleChange} type="text" id="username" placeholder="Username" />
             </div>
             <div>
               <Label value="Your email" />
-              <TextInput
+              <TextInput onChange={handleChange}
                 type="email"
-                id="emal"
+                id="email"
                 placeholder="name@company.com"
               />
             </div>
             <div>
               <Label value="Your Password" />
-              <TextInput type="password" id="password" placeholder="password" />
+              <TextInput onChange={handleChange} type="password" id="password" placeholder="password" />
             </div>
 
-            <Button type="submit" gradientMonochrome="success">
-              Sin-up
+            <Button disabled={loading} type="submit" gradientMonochrome="success">
+              {
+                loading ?
+                <>
+                <Spinner size={'lg'} className="pl-2" />
+                <span>Loading.....😟</span>
+                </>
+                :
+                "Sin-up"
+              }
             </Button>
           </form>
           <div className="mt-10 font-semibold ">
-            <span> You have already an Account ?</span>
+            <span>  Have already an Account ?</span>
             <Link className="text-blue-700 " to={"/sing-in"}>
               Please Sing-In
             </Link>
+          </div>
+          <div>
+            {errorMessage && <Alert className="mt-5" color={"red"}>{errorMessage}</Alert>}
           </div>
         </div>
       </div>
