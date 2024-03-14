@@ -6,6 +6,7 @@ import SingUp from "./pages/SingUp";
 import Projects from "./pages/Projects";
 import Dashboard from "./pages/Dashboard";
 import Main from "./layout/Main";
+import Footerr from "./components/Footerr";
 
 function App() {
   const router = createBrowserRouter([
@@ -37,6 +38,10 @@ function App() {
         {
           path: "/dashboard",
           element: <Dashboard />,
+        },
+        {
+          path: "/footer",
+          element: <Footerr />,
         },
       ],
     },
