@@ -6,8 +6,8 @@ const Header = () => {
   return (
     <Navbar className='border-b-2'>
 
-      <Link className='self-center whitespace-nowrap text-sm sm:text-xl dark:text-white' to={"/"}>
-        <span className='px-2 py-1 text-white bg-gradient-to-r rounded-lg from-green-400 to-gray-300' >Mehedi</span>
+      <Link className='self-center text-sm whitespace-nowrap sm:text-xl dark:text-white' to={"/"}>
+        <span className='px-2 py-1 text-white rounded-lg bg-gradient-to-r from-green-400 to-gray-300' >Mehedi</span>
         Blog
       </Link>
 
@@ -19,7 +19,7 @@ const Header = () => {
         rightIcon={FaSearch}
         />
       </form>
-      <Button className='h-10 w-12 lg:hidden' color="gray" pill>
+      <Button className='w-12 h-10 lg:hidden' color="gray" pill>
             <FaSearch/>
       </Button>
 
@@ -47,11 +47,11 @@ const Header = () => {
 
 
       <div className='flex gap-x-2'>
-        <Button className='h-10 w-12 ' color="gray" pill>
+        <Button className='w-12 h-10 ' color="gray" pill>
           <FaMoon/>
         </Button>
         <Button  gradientMonochrome="success" >
-          <Link to={"sing-up"} >SingUp</Link>
+          <Link to={"sign-up"} >SingUp</Link>
         </Button>
         <NavbarToggle/>
       </div>

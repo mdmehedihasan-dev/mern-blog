@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import About from "./pages/About";
 import Home from "./pages/Home";
-import SingIn from "./pages/SingIn";
-import SingUp from "./pages/SingUp";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import Projects from "./pages/Projects";
 import Dashboard from "./pages/Dashboard";
 import Main from "./layout/Main";
@@ -24,12 +24,12 @@ function App() {
           element: <About />,
         },
         {
-          path: "/sing-in",
-          element: <SingIn />,
+          path: "/sign-in",
+          element: <SignIn />,
         },
         {
-          path: "/sing-up",
-          element: <SingUp />,
+          path: "/sign-up",
+          element: <SignUp />,
         },
         {
           path: "/projects",

@@ -2,7 +2,7 @@ import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const SingUp = () => {
+const SignUp = () => {
 
   const [formData,setFormData] = useState({})
   const [errorMessage,setErrorMessage] = useState(null)
@@ -39,7 +39,7 @@ const SingUp = () => {
       }
       setLoading(false)
       if(res.ok){
-        navigate('/sing-in')
+        navigate('/sign-in')
       }
     } catch (error) {
       setErrorMessage(error.message)
@@ -93,13 +93,13 @@ const SingUp = () => {
                 <span>Loading.....😟</span>
                 </>
                 :
-                "Sin-up"
+                "Sign-up"
               }
             </Button>
           </form>
           <div className="mt-10 font-semibold ">
             <span>  Have already an Account ?</span>
-            <Link className="text-blue-700 " to={"/sing-in"}>
+            <Link className="text-blue-700 " to={"/sign-in"}>
               Please Sing-In
             </Link>
           </div>
@@ -112,4 +112,4 @@ const SingUp = () => {
   );
 };
 
-export default SingUp;
+export default SignUp;
