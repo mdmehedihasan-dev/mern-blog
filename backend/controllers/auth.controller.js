@@ -4,7 +4,7 @@ import { errorHandler } from "../utils/error.js";
 import  jwt  from "jsonwebtoken";
 
 // sing-up api 
-export const singup =async (req,res,next)=>{
+export const signup =async (req,res,next)=>{
     const {username, email, password} = req.body;
 
     if(!username || !email || !password || username==="" || password==="" || email===""){
