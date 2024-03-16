@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsDribbble } from 'react-icons/bs';
 const Footerr = () => {
   return (
-    <Footer container className='border border-t-8 border-teal-500'>
+    <Footer container className='border border-t-2 border-black'>
       <div className='w-full mx-auto max-w-7xl'>
         <div className='grid justify-between w-full sm:flex md:grid-cols-1'>
           <div className='mt-5'>
