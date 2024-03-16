@@ -51,7 +51,7 @@ const Header = () => {
           <FaMoon/>
         </Button>
         <Button  gradientMonochrome="success" >
-          <Link to={"sign-up"} >SingUp</Link>
+          <Link to={"sign-up"} >Sign-Up</Link>
         </Button>
         <NavbarToggle/>
       </div>
