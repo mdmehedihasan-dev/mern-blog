@@ -1,85 +1,110 @@
-import {Link} from 'react-router-dom'
-import {Button, Navbar,  NavbarToggle, TextInput} from 'flowbite-react'
+import { Link, useLocation } from "react-router-dom";
+import { Avatar, Button, Dropdown, Navbar, NavbarToggle, TextInput } from "flowbite-react";
 import { FaMoon, FaSearch } from "react-icons/fa";
+import {useSelector} from 'react-redux';
 
 const Header = () => {
+  // const path = useLocation().pathname;
+  const {currentUser} = useSelector(state=>state.user)
   return (
-    <Navbar className='border-b-2'>
-
-      <Link className='self-center text-sm whitespace-nowrap sm:text-xl dark:text-white' to={"/"}>
-        <span className='px-2 py-1 text-white rounded-lg bg-gradient-to-r from-green-400 to-gray-300' >Mehedi</span>
+    <Navbar className="border-b-2">
+      <Link
+        className="self-center text-sm whitespace-nowrap sm:text-xl dark:text-white"
+        to={"/"}
+      >
+        <span className="px-2 py-1 text-white rounded-lg bg-gradient-to-r from-green-400 to-gray-300">
+          Mehedi
+        </span>
         Blog
       </Link>
 
       <form>
         <TextInput
-        type='text'
-        placeholder='Serach...'
-        className='hidden lg:inline'
-        rightIcon={FaSearch}
+          type="text"
+          placeholder="Serach..."
+          className="hidden lg:inline"
+          rightIcon={FaSearch}
         />
       </form>
-      <Button className='w-12 h-10 lg:hidden' color="gray" pill>
-            <FaSearch/>
+      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
+        <FaSearch />
       </Button>
-
-      <Navbar.Collapse className='hidden lg:block'>
-        <Navbar.Link >
-          <Link to={"/"}>
-          Home
-          </Link>
+      {/* =========for large device ====== */}
+      <Navbar.Collapse className="hidden lg:block">
+        <Navbar.Link>
+          <Link to={"/"}>Home</Link>
         </Navbar.Link>
         <Navbar.Link>
-          <Link to={"/about"}>
-          About
-          </Link>
+          <Link to={"/about"}>About</Link>
         </Navbar.Link>
         <Navbar.Link>
-          <Link to={"/Projects"}>
-          Projects
-          </Link>
+          <Link to={"/Projects"}>Projects</Link>
         </Navbar.Link>
       </Navbar.Collapse>
-     
-     
-     
 
-
-
-      <div className='flex gap-x-2'>
-        <Button className='w-12 h-10 ' color="gray" pill>
-          <FaMoon/>
+      {/*======== button for dark theme ======== */}
+      <div className="flex gap-x-2">
+        <Button className="w-12 h-10 " color="gray" pill>
+          <FaMoon />
         </Button>
-        <Button  gradientMonochrome="success" >
-          <Link to={"sign-up"} >Sign-Up</Link>
-        </Button>
-        <NavbarToggle/>
+
+        {
+          currentUser?(
+            <Dropdown 
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt="user" img={currentUser.profilePicture} rounded />
+            }
+            >
+                <Dropdown.Header>
+              <span className='block text-sm'>@{currentUser.username}</span>
+              <span className='block text-sm font-medium truncate'>
+                {currentUser.email}
+              </span>
+            </Dropdown.Header>
+            <Link to={'/dashboard?tab=profile'}>
+              <Dropdown.Item>
+                Profile
+              </Dropdown.Item>
+            </Link>
+            <Dropdown.Divider/>
+            <Dropdown.Item >Sign out</Dropdown.Item>
+
+              
+           
+
+            </Dropdown>
+          ):
+          (
+            <Link to={"sign-up"}>   
+            <Button gradientMonochrome="success">
+            Sign-Up
+            </Button>
+              </Link>
+           )
+        }
+
+
+
+         
+        <NavbarToggle />
       </div>
 
-      <Navbar.Collapse className=' md:hidden'>
-        <Navbar.Link >
-          <Link to={"/"}>
-          Home
-          </Link>
+      {/*========= for mobile device ========= */}
+      <Navbar.Collapse className=" md:hidden">
+        <Navbar.Link>
+          <Link to={"/"}>Home</Link>
         </Navbar.Link>
         <Navbar.Link>
-          <Link to={"/about"}>
-          About
-          </Link>
+          <Link to={"/about"}>About</Link>
         </Navbar.Link>
         <Navbar.Link>
-          <Link to={"/Projects"}>
-          Projects
-          </Link>
+          <Link to={"/Projects"}>Projects</Link>
         </Navbar.Link>
       </Navbar.Collapse>
-
-  
-    
-      
     </Navbar>
-    
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
