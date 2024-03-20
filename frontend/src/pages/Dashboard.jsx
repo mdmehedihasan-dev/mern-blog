@@ -18,13 +18,13 @@ const Dashboard = () => {
 
 
   return (
-    <div className="flex flex-col w-full min-h-screen md:flex-row">
-      <div  >
+    <div className="flex flex-col min-h-screen md:flex-row">
+      <div className="md:w-56"  >
         {/* sidebar  */}
         <DashSidebar/>
       </div>
 
-      <div>
+      <div className="w-full">
         {/* profile...........  */}
         {tab === 'profile' && <DashProfile/>}
       </div>
