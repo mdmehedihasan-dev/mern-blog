@@ -79,15 +79,15 @@ export const google = async(req,res,next)=>{
         }else{
             const genetatedPassword = Math.random().toString(36).slice(-8)+Math.random().toString(36).slice(-8);
             const hashedPassword = bcryptjs.hashSync(genetatedPassword,10);
-            const newUswer = new User({
+            const newUser = new User({
                 username: name.toLowerCase().split('').join('')+Math.random().toString(9).slice(-4),
                 email,
                 password:hashedPassword,
                 profilePicture:googlePhotoUrl
             })
-            await newUswer.save();
+            await newUser.save();
             const token = jwt.sign({id:newUser._id}.process.env.JWT_SECRET);
-            const {password, ...rest}=newUswer._doc;
+            const {password, ...rest}=newUser._doc;
             res.status(200).cookie('access_token',token,{
                 httpOnly:true,
             })
