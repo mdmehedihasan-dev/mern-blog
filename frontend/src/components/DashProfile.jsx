@@ -32,16 +32,6 @@ const DashProfile = () => {
     },[imageFile])
 
     const uploadImage=async()=>{
-        // service firebase.storage {
-        //       match /b/{bucket}/o {
-        //         match /{allPaths=**} {
-        //           allow read;
-        //           allow write: if
-        //           request.resource.size <2*1024*1024 && 
-        //           request.resource.contentType.matches('image/.*');
-        //         }
-        //       }
-        //     }
         const storage = getStorage(app)
         const fileName = new Date().getTime()+imageFile.name;
         const storageRef = ref(storage,fileName);
@@ -67,7 +57,7 @@ const DashProfile = () => {
 const handleChange =(e)=>{
     setFormData({...formData,[e.target.id]:e.target.value})
 }
-// console.log(formData)
+console.log(formData)
 
 const handleSubmit = async(e)=>{
     e.preventDefault();
